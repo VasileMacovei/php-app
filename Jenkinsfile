@@ -5,29 +5,25 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'composer install'
-                sh 'vendor/bin/phpunit --testdox'
+                sh '''
+                    docker build -t php-app-test .
+                    docker run --rm php-app-test vendor/bin/phpunit
+                '''
             }
         }
 
         stage('Docker Build') {
-            when {
-                branch 'main'
-            }
             steps {
                 sh 'docker build -t php-app:latest .'
             }
         }
 
         stage('Docker Deploy') {
-            when {
-                branch 'main'
-            }
             steps {
                 sh '''
                     docker stop php-app || true
                     docker rm php-app || true
-                    docker run -d --name php-app -p 8081:80 php-app:latest
+                    docker run -d --name php-app -p 8081:8081 php-app:latest
                 '''
             }
         }
