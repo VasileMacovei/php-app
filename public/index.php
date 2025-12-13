@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../src/Calculator.php';
 
 $calc = new Calculator();
-$result = $calc->add(2, 3);
+$result = $calc->add(2, 6);
 ?>
 
 <!DOCTYPE html>
