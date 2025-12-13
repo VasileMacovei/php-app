@@ -14,7 +14,7 @@ $result = $calc->add(2, 3);
 
 <body>
     <h1>Calculadora PHP con Docker y Jenkins</h1>
-    <p>2 + 3 = <strong><?= $result ?></strong></p>
+    <p>2 + 6 = <strong><?= $result ?></strong></p>
 </body>
 
 </html>
