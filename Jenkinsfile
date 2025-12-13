@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh '''
                     docker build -t php-app-test .
-                    docker run --rm php-app-test vendor/bin/phpunit
+                    docker run --rm php-app-test vendor/bin/phpunit tests
                 '''
             }
         }
