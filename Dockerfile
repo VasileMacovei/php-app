@@ -1,12 +1,22 @@
-FROM php:8.3-apache
+FROM php:8.2-cli
 
-WORKDIR /var/www/html
+# Dependencias del sistema
+RUN apt-get update && apt-get install -y unzip git
 
+# Instalar Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /app
+
+# Composer primero (mejor cache)
+COPY composer.json composer.lock* ./
+RUN composer install --no-interaction
+
+# Código de la app
 COPY . .
 
-RUN apt-get update && apt-get install -y unzip \
-    && curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer install
+# Puerto de la app (NO Jenkins)
+EXPOSE 8081
 
-EXPOSE 80
+# Servidor web PHP
+CMD ["php", "-S", "0.0.0.0:8081", "-t", "public"]
