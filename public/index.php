@@ -13,7 +13,7 @@ $result = $calc->add(2, 6);
 </head>
 
 <body>
-    <h1>Calculadora PHP con Docker y Jenkins</h1>
+    <h1>Calculadora PHP con Docker y Jenkins - Vasile</h1>
     <p>2 + 6 = <strong><?= $result ?></strong></p>
 </body>
 
